@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:otp_text_field/otp_field.dart';
-import 'package:otp_text_field/style.dart';
+
+import '../comman/colors.dart';
+import '../component/continuebtn.dart';
+import '../component/otp.dart';
 
 class OtpScreen extends StatefulWidget {
   const OtpScreen({Key? key}) : super(key: key);
@@ -10,17 +12,37 @@ class OtpScreen extends StatefulWidget {
 }
 
 class _OtpScreenState extends State<OtpScreen> {
-  OtpFieldController otpFieldController = OtpFieldController();
+  int secondsRemaining = 30;
+  late ValueNotifier<int> timerNotifier;
+
+  @override
+  void initState() {
+    super.initState();
+
+    timerNotifier = ValueNotifier<int>(secondsRemaining);
+
+    // Start the countdown timer when the page opens
+    startTimer();
+  }
+
+  void startTimer() {
+    Future.delayed(Duration(seconds: 1), () {
+      if (secondsRemaining > 0) {
+        secondsRemaining--;
+        timerNotifier.value = secondsRemaining;
+        startTimer(); // Call startTimer recursively
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white, // Change to your desired background color
+      backgroundColor: primaryBackground, // Change to your desired background color
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            // Your logo or image here
             Padding(
               padding: const EdgeInsets.fromLTRB(0, 80, 0, 20),
               child: Container(
@@ -28,7 +50,7 @@ class _OtpScreenState extends State<OtpScreen> {
               ),
             ),
             Container(
-              padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
+              padding: EdgeInsets.fromLTRB(30, 20, 20, 20),
               child: Column(
                 children: [
                   Container(
@@ -38,7 +60,7 @@ class _OtpScreenState extends State<OtpScreen> {
                       children: [
                         Text(
                           'Verify your mobile number',
-                          style: TextStyle(fontSize: 18, color: Colors.black), // Change text style
+                          style: TextStyle(fontSize: 18, color: textWhite),
                         ),
                       ],
                     ),
@@ -59,7 +81,7 @@ class _OtpScreenState extends State<OtpScreen> {
                     children: [
                       Text(
                         '+91 9876543210',
-                        style: TextStyle(fontSize: 14, color: Colors.black), // Change text style
+                        style: TextStyle(fontSize: 14, color: textWhite),
                       ),
                     ],
                   ),
@@ -67,42 +89,47 @@ class _OtpScreenState extends State<OtpScreen> {
               ),
             ),
             Container(
-              padding: EdgeInsets.fromLTRB(20, 0, 20, 20),
-              child: OTPTextField(
-                controller: otpFieldController, // Assign the OtpFieldController
-                length: 4,
-                width: MediaQuery.of(context).size.width,
-                fieldWidth: 80,
-                style: TextStyle(fontSize: 17),
-                textFieldAlignment: MainAxisAlignment.spaceAround,
-                fieldStyle: FieldStyle.underline,
-                onCompleted: (pin) {
-                  print("Completed: $pin");
-                },
-              ),
+              padding: EdgeInsets.fromLTRB(30, 0, 20, 20),
+              child: otptextFeld(),
             ),
             Container(
-              padding: EdgeInsets.fromLTRB(20, 0, 20, 20),
+              padding: EdgeInsets.fromLTRB(30, 0, 20, 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Text(
-                    'Expect code in 30 seconds',
-                    style: TextStyle(fontSize: 14, color: Color(0xff7A7C7C)),
+                  ValueListenableBuilder<int>(
+                    valueListenable: timerNotifier,
+                    builder: (context, value, child) {
+                      return RichText(
+                        text: TextSpan(
+                          children: [
+                            TextSpan(
+                              text: 'Expect code in ',
+                        style: TextStyle(fontSize: 14, color: Color(0xff7A7C7C)),
+
+                            ),
+                            TextSpan(
+                              text: '$value seconds',
+                        style: TextStyle(fontSize: 14, color: textWhite),
+
+                            ),
+                            
+                          ]
+                        ),
+                      );
+                    },
                   ),
                 ],
               ),
             ),
             Container(
               padding: EdgeInsets.fromLTRB(30, 75, 30, 0),
-              child: ElevatedButton(
-                onPressed: () {
-                  // Handle button click here
+              child: CircularButton(
+                onPress: (props) {
+              //      focusNode.unfocus();
+              // formKey.currentState!.validate();
                 },
-                child: Text(
-                  'Continue',
-                  style: TextStyle(fontSize: 18),
-                ),
+                props: {/* Any properties you want to pass */}
               ),
             ),
           ],
@@ -111,4 +138,3 @@ class _OtpScreenState extends State<OtpScreen> {
     );
   }
 }
-
