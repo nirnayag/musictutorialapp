@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '../comman/colors.dart';
 
 class CircularButton extends StatelessWidget {
-  final double radius = 25; // 25 pixels
-  final Color color = contunueYellow;
+  final double radius = 25;
+  final Color color = contunueYellow; // Assuming this color is defined elsewhere
   final double buttonHeight = 40;
   final Function onPress;
   final dynamic props;
@@ -14,10 +14,10 @@ class CircularButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: double.infinity, // Full width
+      width: double.infinity,
       height: buttonHeight,
       child: ElevatedButton(
-        onPressed: () => onPress(props),
+        onPressed: () => onPress(),
         style: ButtonStyle(
           backgroundColor: MaterialStateProperty.all(color),
           shape: MaterialStateProperty.all(
@@ -26,10 +26,8 @@ class CircularButton extends StatelessWidget {
             ),
           ),
         ),
-        child: Text('Continue',style: TextStyle(color: textContinue),),
+        child: Text('Continue', style: TextStyle(color: textContinue),),
       ),
     );
   }
 }
-
-// Usage:

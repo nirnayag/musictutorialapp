@@ -1,3 +1,4 @@
+import 'package:choira/pages/otpscreen.dart';
 import 'package:flutter/material.dart';
 
 import '../comman/colors.dart';
@@ -61,17 +62,7 @@ class LoginScreen extends StatelessWidget {
           padding: EdgeInsets.fromLTRB(20, 0, 20, 20),
           child: MobileField()),
 
-          Container(
-          padding: EdgeInsets.fromLTRB(30, 75, 30, 0),
-
-            child: CircularButton(
-            onPress: (props) {
-              // Your custom logic when the button is pressed
-              // You can use the `props` parameter to pass data or perform actions.
-            },
-            props: {/* Any properties you want to pass */}
-          ),
-          )
+         
         ],
       ),
     );

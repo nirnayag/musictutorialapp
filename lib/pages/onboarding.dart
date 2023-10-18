@@ -1,3 +1,4 @@
+import 'package:choira/pages/loginscreen.dart';
 import 'package:flutter/material.dart';
 
 import '../comman/colors.dart';
@@ -72,7 +73,10 @@ class OnBoarding extends StatelessWidget {
             width: screenWidth,
             child: ElevatedButton(
               onPressed: () {
-                // Add your login logic here
+                Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => LoginScreen()),
+      );
               },
               style: ElevatedButton.styleFrom(
                 primary: buttonYellow, // Button background color

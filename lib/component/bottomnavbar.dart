@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import '../comman/colors.dart';
 import '../pages/homescreen.dart';
 
-class Example extends StatefulWidget {
+class BottomNbar extends StatefulWidget {
   @override
-  _ExampleState createState() => _ExampleState();
+  _BottomNbarState createState() => _BottomNbarState();
 }
 
-class _ExampleState extends State<Example> {
+class _BottomNbarState extends State<BottomNbar> {
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.w600);
