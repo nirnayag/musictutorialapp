@@ -1,4 +1,5 @@
 // import 'package:choira/pages/onboarding.dart';
+import 'package:choira/component/bottomnavbar.dart';
 import 'package:flutter/material.dart';
 import 'pages/loginscreen.dart';
 import 'pages/otpscreen.dart';
@@ -12,7 +13,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: OtpScreen(),
+      home: SafeArea(
+        child: Scaffold(
+          bottomNavigationBar: Example(),
+        ),
+      ),
+
     );
   }
 }

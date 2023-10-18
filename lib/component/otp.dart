@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
 
 import '../pages/homescreen.dart';
+import 'bottomnavbar.dart';
 import 'continuebtn.dart';
 import 'timmertext.dart';
 
@@ -83,7 +84,7 @@ class _otptextFeldState extends State<otptextFeld> {
                     if (pin == '2222') { // Replace '2222' with the correct OTP
     // OTP is correct, navigate to a new screen
     Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => HomeScreen(), // Replace SuccessScreen with your desired screen
+      builder: (context) => Placeholder(), // Replace SuccessScreen with your desired screen
     ));
   }
                   },
